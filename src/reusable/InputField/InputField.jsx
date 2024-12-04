@@ -11,7 +11,7 @@ import {
 } from "antd";
 
 import FileUpload from "../FileUpload/FileUpload";
-
+import { runes } from 'runes2';
 const { RangePicker } = DatePicker;
 const InputField = ({ formItemProps, onChange, onSearch }) => {
   const {
@@ -26,8 +26,9 @@ const InputField = ({ formItemProps, onChange, onSearch }) => {
     layout,
     hasFeedback,
     validateStatus,
-    help,
+    isError,
     options,
+    maxLength
   } = formItemProps;
 
   return (
@@ -39,8 +40,11 @@ const InputField = ({ formItemProps, onChange, onSearch }) => {
       wrapperCol={wrapperCol} // Layout configuration for content of the form itemsss
       layout={layout} // virtecal horizontal
       hasFeedback={hasFeedback} // true , false
-      validateStatus={validateStatus} // 'success', 'warning', 'error', 'validating'.
-      help={help} // message
+      validateStatus={
+        value.length > 0 ? (isError.length === 0 ? "" : "error") : ""
+      } // 'success', 'warning', 'error', 'validating'.
+      help={isError} // message
+
     >
       {type == "checkbox" ? (
         <Checkbox name={name} onChange={onChange} checked={value}>
@@ -58,6 +62,7 @@ const InputField = ({ formItemProps, onChange, onSearch }) => {
         <FileUpload />
       ) : type == "select" ? (
         <Select
+         mode="tags"
           showSearch
           placeholder="Select a person"
           optionFilterProp="label"
@@ -72,9 +77,16 @@ const InputField = ({ formItemProps, onChange, onSearch }) => {
           placeholder={placeholder}
           value={value}
           type={type}
+          name={name}
           style={style}
           allowClear
           onChange={onChange}
+          count={{
+            show: maxLength,
+            max: maxLength,
+            strategy: (txt) => runes(txt).length,
+            exceedFormatter: (txt, { max }) => runes(txt).slice(0, max).join(''),
+          }}
         />
       )}
     </Form.Item>
