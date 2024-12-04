@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  /* overflow-x: hidden; */
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+ul li span {
+  color: #000000;
+}
+.overflow-hidden {
+  height: 100%;
+}
+
+/* icon css */
+.icon-hover {
+  transition: color 0.3s;
+}
+
+.icon-hover:hover {
+  color: #ffcc00;
+}
+
+/* menu drawer */
+
+.ant-drawer-content-wrapper {
+  width: 100% !important;
+}
+
+.ant-drawer-body {
+  padding: 0px 0px 15px 0px !important;
+}
+.ant-menu-submenu-title {
+  gap: 10px !important;
+  align-items: center !important;
+}
+
+/* styles.css */
+.ant-drawer-header {
+  border-bottom: 1px solid rgb(210, 210, 210) !important;
+}
+.ant-drawer-close,
+.ant-drawer-header-title {
+  color: #ffffff !important;
+}
+
+.ant-menu-item {
+  color: #ffffff !important;
+  gap: 10px !important;
+  font-weight: 600 !important;
+}
+.ant-menu-item > span {
+  color: #ffffff !important;
+}
+.ant-menu-item-selected > span {
+  color: #2c1944 !important;
+}
+
+.ant-menu-item:hover {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ) !important; /* Light hover effect */
+}
+
+.ant-menu-item-selected {
+  background-color: #ffffff !important; /* Background color for selected item */
+  color: #2c1944 !important; /* Text color for selected item */
+}
+
+.ant-menu-item-selected .anticon {
+  color: #2c1944 !important; /* Icon color for selected item */
+}
+
+/* header menu css */
+.menu-item {
+  font-weight: 600;
+  position: relative;
+}
+.active-menu-item {
+  color: #44226d;
+  transition: all 0.3s ease-in-out;
+}
+
+.active-menu-item::after,
+.menu-item::after {
+  content: "";
+  background-color: #44226d;
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: right left;
+  transition: transform 0.25s ease-out;
+}
+.active-menu-item:after {
+  transform: scaleX(1);
+  transform-origin: left right;
+}
+.active-menu-item:hover::after,
+.menu-item:hover::after {
+  transform: scaleX(1);
+  transform-origin: left right;
+}
+
+/* tooltip */
+
+.ant-tooltip-inner {
+  min-height: 10px !important;
+  font-size: 13px !important;
+  padding: 4px 8px !important;
+}
+
+/* flotable buttn */
+.ant-float-btn-body {
+  background: #ff1f59 !important;
+}
+
+/* ant input filed css */
+.ant-input-group-wrapper {
+  height: 40px;
+}
+.ant-input-wrapper {
+  height: 100%;
+}
+
+.custom-search .ant-input {
+  height: 100%;
+  font-size: 13px;
+}
+
+.custom-search .ant-btn {
+  font-size: 12px;
+}
+
+/* spinner / Loader */
+.ant-spin-text {
+  margin-top: 20px !important;
+}
+.draggable-item {
+  touch-action: none; /* Allow the drag event to work */
+  user-select: none; /* Prevent text selection during dragging */
+  cursor: grab; /* Make it clear that it's a draggable item */
+}
