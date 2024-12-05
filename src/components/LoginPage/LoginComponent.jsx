@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "antd";
 import ButtonComponent from "../../reusable/Button/ButtonComponent";
 import { useNavigate } from "react-router-dom";
+import InputField from "../../reusable/InputField/InputField";
 // import 'antd/dist/antd.css';  // Import Ant Design styles
 // import './LoginComponent.css'; // You can create a custom CSS file if needed
 
@@ -22,7 +23,11 @@ const LoginComponent = () => {
         </div>
 
         <form action="#" method="POST">
+
           {/* Username Field */}
+          <div className="mb-4">
+            
+            </div>
           <div className="mb-4">
             <label
               htmlFor="username"
