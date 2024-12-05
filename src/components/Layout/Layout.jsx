@@ -74,14 +74,14 @@ const Layout = () => {
     <div className="w-full" ref={containerRef}>
       <Header scrollY={scrollY} />
       <div className="min-h-lvh">
-        {fields.map((field) => (
+        {/* {fields.map((field) => (
           <InputField
             onChange={(e) =>
               handleChange(e, fields, field.regexType, field.maxLength)
             }
             formItemProps={field}
           />
-        ))}
+        ))} */}
         <Outlet />
       </div>
       <Footer />

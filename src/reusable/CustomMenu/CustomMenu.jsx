@@ -9,12 +9,11 @@ const UserMenu = () => {
 
   const handleMenuClick = (e) => {
     if (e.key === "profile") {
-      navigate("/profile");
-    } else if (e.key === "login") {
-      navigate("/login");
+      return navigate("/profile");
     } else if (e.key === "logout") {
       // Handle logout logic here
       console.log("Logged out");
+      return navigate("/loginPage");
     }
   };
 
@@ -23,9 +22,7 @@ const UserMenu = () => {
       <Menu.Item key="profile" icon={<FaUser />}>
         Profile
       </Menu.Item>
-      <Menu.Item key="login" icon={<FaSignInAlt />}>
-        Login
-      </Menu.Item>
+
       <Menu.Item key="logout" icon={<FaSignOutAlt />}>
         Logout
       </Menu.Item>
@@ -35,11 +32,7 @@ const UserMenu = () => {
   return (
     <Dropdown overlay={menu} trigger={["hover"]}>
       <div className="flex items-center cursor-pointer">
-        <DynamicIcon
-          iconName="FaUser"
-          color="#ff1f59c4"
-          size={22}
-        />
+        <DynamicIcon iconName="FaUser" color="#ff1f59c4" size={22} />
       </div>
     </Dropdown>
   );

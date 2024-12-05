@@ -6,7 +6,7 @@ import { items, menuData } from "../../data";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import DynamicIcon from "../../reusable/IconComponent/IconComponent";
 import UserMenu from "../../reusable/CustomMenu/CustomMenu";
-
+import { CurrentRoute } from "../../utils/constant";
 
 const Header = ({ scrollY }) => {
   // hooks
@@ -22,6 +22,8 @@ const Header = ({ scrollY }) => {
     setOpenDrawer(false);
   };
   console.log("scrollY", scrollY);
+  console.log("CurrentRoute()", CurrentRoute());
+
   return (
     <header
       id="header"
@@ -49,7 +51,11 @@ const Header = ({ scrollY }) => {
               <Link
                 to={item?.path}
                 className={
-                  item.path.includes(pathName) && pathName !== "/"
+                  (item.path.includes(CurrentRoute()) &&
+                    pathName !== "/" &&
+                    CurrentRoute() != "layout") ||
+                  (CurrentRoute() == "layout" &&
+                    item.path.includes("dashboard"))
                     ? "menu-item active-menu-item"
                     : "menu-item"
                 }

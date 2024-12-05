@@ -1,5 +1,6 @@
 import axios from "axios";
-import { env } from "../common/constant";
+import { env } from "../utils/constant";
+
 
 export const generateToken = async () => {
   console.log(

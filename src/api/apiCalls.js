@@ -1,8 +1,10 @@
 import axios from "axios";
-import { env } from "../common/constant.jsx";
+
 import { ApiHeaders } from "./apiHeader";
-import { toast } from "react-toastify";
+
 import { useCallback, useState } from "react";
+import { message } from "antd";
+import { env } from "../utils/constant";
 
 export const useApiCalls = () => {
   const [loadingStates, setLoadingStates] = useState({});
@@ -34,7 +36,7 @@ export const useApiCalls = () => {
         let { Status, Message, isToastAvailable, data = [] } = result[0];
         console.log("Status", Status, isToastAvailable, Message);
         isToastAvailable == 1 &&
-          toast[Status == 1 ? "success" : "error"](Message);
+          message[Status == 1 ? "success" : "error"](Message);
       }
       return result;
     } catch (error) {

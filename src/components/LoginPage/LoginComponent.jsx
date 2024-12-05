@@ -1,9 +1,16 @@
 import React from "react";
 import { Button } from "antd";
+import ButtonComponent from "../../reusable/Button/ButtonComponent";
+import { useNavigate } from "react-router-dom";
 // import 'antd/dist/antd.css';  // Import Ant Design styles
 // import './LoginComponent.css'; // You can create a custom CSS file if needed
 
 const LoginComponent = () => {
+  let navigate = useNavigate();
+  const loginHandel = () => {
+    navigate("/layout");
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md max-xl:m-2">
@@ -51,9 +58,16 @@ const LoginComponent = () => {
 
           {/* Login Button */}
           <div className="mb-4">
-            <Button type="primary" className="w-full py-2 text-lg rounded-md">
-              Login
-            </Button>
+            {/* <Button type="primary" className="w-full py-2 text-lg rounded-md">
+              
+            </Button> */}
+            <ButtonComponent
+              name="Login"
+              type="primary"
+              onClick={loginHandel}
+              size="large"
+              btnStyle={{ width: "100%" }}
+            />
           </div>
 
           {/* Forgot Password Link */}
