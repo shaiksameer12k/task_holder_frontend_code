@@ -2,6 +2,19 @@
 ## Live link
 https://taskholderfrontend.vercel.app/userLoginPage
 
+## Installation
+ #Clone the repository:
+
+    git clone https://github.com/shaiksameer12k/task_holder_frontend_code.git 
+
+ #Navigate to the project folder, Install the required dependencies:
+
+    npm install   
+
+ #Running the Application:
+    
+    npm run dev
+
 ## Dependencies
     @ant-design/icons: ^5.5.2
     @dnd-kit/core: ^6.2.0
@@ -36,16 +49,4 @@ This project includes several reusable components to help with common tasks in R
     Input Field – A reusable input field with validation support.
     Loading – A loading spinner for asynchronous operations.
 
-## Installation
- #Clone the repository:
-
-    git clone https://github.com/shaiksameer12k/task_holder_frontend_code.git 
-
- #Navigate to the project folder, Install the required dependencies:
-
-    npm install   
-
- #Running the Application:
-    
-    npm run dev
 
