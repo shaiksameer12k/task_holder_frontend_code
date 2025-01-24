@@ -5,6 +5,10 @@ const { RangePicker } = DatePicker;
 import {
   AppstoreAddOutlined,
   CaretRightFilled,
+  CheckCircleFilled,
+  CheckCircleOutlined,
+  CloseCircleFilled,
+  CloseCircleOutlined,
   DeleteFilled,
   EditFilled,
   PlusSquareFilled,
@@ -20,60 +24,113 @@ const TaskItem = ({
   deleteTaskHandel,
   editTaskHandel,
   viewTaskHandel,
+  updateTaskStatusHandel,
   ...data
 }) => {
   console.log("TaskItemData", data?.TaskItemData);
-  let { title, description, updatedAt, borderColor, bgColor, color, _id } =
-    data?.TaskItemData;
+  let {
+    title,
+    description,
+    updatedAt,
+    borderColor,
+    bgColor,
+    color,
+    _id,
+    status,
+  } = data?.TaskItemData;
 
-  // console.log("updatedDate", updatedAt);
+  console.log("updatedDate status", status);
   return (
     <Card
-      bodyStyle={{ padding: "8px" }}
+      bodyStyle={{ padding: "8px", display: "flex", gap: "3px" }}
       size="small"
-      className="my-1 shadow-sm"
+      className="my-1 shadow-sm taskItem"
       style={{
         border: borderColor,
         background: bgColor,
       }}
     >
-      <div className="flex justify-between items-center">
-        <h3
-          className="font-sans text-sm font-semibold"
-          style={{ color: color }}
-        >
-          {title}
-        </h3>
+      {status != "Completed" && (
+        <div className="flex flex-col items-center justify-center gap-1 cardActivity">
+          <Tooltip title="Click if task Completed" placement="left">
+            <CheckCircleFilled
+              className="cursor-pointer"
+              style={{ color: "#7BB683", fontSize: "19px" }}
+              onClick={() =>
+                updateTaskStatusHandel(_id, title, description, "Completed")
+              }
+            />
+          </Tooltip>
+          <Tooltip title="Click if task Incompleted" placement="left">
+            <CloseCircleFilled
+              className="cursor-pointer"
+              style={{ color: "#E63535", fontSize: "19px" }}
+              onClick={() =>
+                updateTaskStatusHandel(_id, title, description, "Incomplete")
+              }
+            />
+          </Tooltip>
+        </div>
+      )}
 
-        <span className="font-sans text-xs font-normal">
-          {moment(updatedAt).fromNow()}
-        </span>
-      </div>
-      <div className="flex items-end gap-4 justify-between">
-        <p className="text-sm text-gray-500">{description}</p>
-        <div className="flex gap-2">
-          <Tooltip placement="bottomRight" title="Click To Delete">
-            <DeleteFilled
-              className="cursor-pointer"
-              style={{ fontSize: "16px", color: "red" }}
-              onClick={() => deleteTaskHandel(_id)}
-            />
-          </Tooltip>
+      <div className="flex-1">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <h3
+              className="font-sans text-sm font-semibold"
+              style={{ color: color }}
+            >
+              {title}
+            </h3>
 
-          <Tooltip placement="bottomRight" title="Click To Edit">
-            <EditFilled
-              className="cursor-pointer"
-              style={{ fontSize: "16px", color: "skyblue" }}
-              onClick={() => editTaskHandel(data?.TaskItemData)}
-            />
-          </Tooltip>
-          <Tooltip placement="bottomLeft" title="Click To View">
-            <CaretRightFilled
-              className="cursor-pointer"
-              style={{ fontSize: "16px", color: "green" }}
-              onClick={() => viewTaskHandel(data?.TaskItemData)}
-            />
-          </Tooltip>
+            {status == "Completed" && (
+              <div
+                style={{
+                  background: "#7BB683",
+                }}
+                className="flex items-center rounded-sm"
+              >
+                <span
+                  style={{ fontSize: "9px" }}
+                  className="text-white font-sans font-bold px-2 "
+                >
+                  {status}
+                </span>
+              </div>
+            )}
+          </div>
+
+          <span className="font-sans text-xs font-normal">
+            {moment(updatedAt).fromNow()}
+          </span>
+        </div>
+
+        <div className="flex items-end gap-4 justify-between">
+          <p className="text-sm text-gray-500">{description}</p>
+          <div className="flex gap-2">
+            <Tooltip placement="bottomRight" title="Click To Delete">
+              <DeleteFilled
+                className="cursor-pointer"
+                style={{ fontSize: "16px", color: "red" }}
+                onClick={() => deleteTaskHandel(_id)}
+              />
+            </Tooltip>
+
+            <Tooltip placement="bottomRight" title="Click To Edit">
+              <EditFilled
+                className="cursor-pointer"
+                style={{ fontSize: "16px", color: "skyblue" }}
+                onClick={() => editTaskHandel(data?.TaskItemData)}
+              />
+            </Tooltip>
+            <Tooltip placement="bottomLeft" title="Click To View">
+              <CaretRightFilled
+                className="cursor-pointer"
+                style={{ fontSize: "16px", color: "green" }}
+                onClick={() => viewTaskHandel(data?.TaskItemData)}
+              />
+            </Tooltip>
+          </div>
         </div>
       </div>
     </Card>
@@ -152,6 +209,35 @@ const Dashboard = () => {
 
   const onCloseDrawerHandel = () => {
     setOpen(false);
+  };
+
+  const updateTaskStatusHandel = async (taskId, title, description, status) => {
+    console.log("taskId", taskId);
+    if (loadingStates?.updateTaskStatusHandel) return;
+    loadingStates.updateTaskStatusHandel = true;
+    try {
+      let params = {
+        userId: loginUserId,
+        taskId: taskId,
+        title: title,
+        description: description,
+        status: status,
+      };
+      console.log("params", params);
+      let result = await ApiCalls(
+        "updateTaskStatusHandel",
+        "put",
+        "user/task",
+        params
+      );
+      console.log("updateTaskStatusHandel", result);
+      if (result?.statusCode == 200) {
+        getTasksData();
+      }
+      console.log("updateTaskStatusHandel result", result);
+    } catch (error) {
+      console.log(`Error in updateTaskStatusHandel ${error}`);
+    }
   };
 
   const colorStyles = [
@@ -299,6 +385,7 @@ const Dashboard = () => {
                 deleteTaskHandel={deleteTaskHandel}
                 editTaskHandel={editTaskHandel}
                 viewTaskHandel={viewTaskHandel}
+                updateTaskStatusHandel={updateTaskStatusHandel}
                 TaskItemData={task}
               />
             ))
