@@ -26,7 +26,7 @@ const TaskItem = ({
   let { title, description, updatedAt, borderColor, bgColor, color, _id } =
     data?.TaskItemData;
 
-  console.log("updatedDate", updatedAt);
+  // console.log("updatedDate", updatedAt);
   return (
     <Card
       bodyStyle={{ padding: "8px" }}
