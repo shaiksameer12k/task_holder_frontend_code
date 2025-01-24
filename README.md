@@ -49,27 +49,11 @@ This project includes several reusable components to help with common tasks in R
 
 - **Button** – A customizable button component.
 - **Custom Menu** – A dynamic, customizable navigation menu.
-- **Custom Tooltip** – A reusable tooltip component for enhanced user experience.
-- **Dynamic Data Table** – A flexible and dynamic table to display data with sorting and filtering.
-- **File Upload** – A simple and customizable file upload component.
-- **Dynamic Icon** – A dynamic icon component with a wide variety of icons.
 - **Input Field** – A reusable input field with validation support.
 - **Loading** – A loading spinner for asynchronous operations.
-- **Modal Component** – A customizable modal for pop-up content.
-- **Notification** – A reusable notification system for displaying messages.
-- **Pop Confirm** – A confirmation dialog component for actions.
-- **Skeleton** – A skeleton screen for loading states.
-
 ---
 
-## Drag and Drop
 
-The project utilizes drag-and-drop functionality using the `@dnd-kit` library.
-
-- **Draggable** – A component to make elements draggable.
-- **Droppable** – A component that enables elements to be dropped into designated areas.
-
----
 
 ## Setup Instructions
 
@@ -77,4 +61,7 @@ To get started with the project:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/shaiksameer12k/ReactViteAnteDesignFullProjectSetup.git
+  git clone https://github.com/shaiksameer12k/task_holder_frontend_code.git
+
+## Live link 
+https://taskholderfrontend.vercel.app/userLoginPage
