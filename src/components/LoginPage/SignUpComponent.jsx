@@ -3,7 +3,13 @@ import { Button, message } from "antd";
 import ButtonComponent from "../../reusable/Button/ButtonComponent";
 import { useNavigate } from "react-router-dom";
 import InputField from "../../reusable/InputField/InputField";
-import { MailOutlined, SecurityScanOutlined, UserOutlined } from "@ant-design/icons";
+
+import {
+  EyeInvisibleOutlined,
+  EyeOutlined,
+  MailOutlined,
+  SecurityScanOutlined,UserOutlined
+} from "@ant-design/icons";
 import { useApiCalls } from "../../api/apiCalls";
 // import 'antd/dist/antd.css';  // Import Ant Design styles
 // import './LoginComponent.css'; // You can create a custom CSS file if needed
