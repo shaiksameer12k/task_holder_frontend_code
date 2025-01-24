@@ -29,7 +29,7 @@ export const useApiCalls = () => {
     );
     try {
       setLoading(functionName, true);
-      let url = `${env.VITE_API_URL}${route}/`;
+      let url = `${env.VITE_API_URL}${route}`;
       let result;
 
       let config = {
