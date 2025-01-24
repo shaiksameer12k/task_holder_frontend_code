@@ -2,20 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import Router from "../../Router.jsx";
+
 import { FloatButton } from "antd";
 import DynamicIcon from "../../reusable/IconComponent/IconComponent.jsx";
-import { Outlet } from "react-router-dom";
-import InputField from "../../reusable/InputField/InputField.jsx";
-import {
-  centrliseFieldsValidation,
-  centrliseFileFieldsValidation,
-} from "../../utils/feildValidation.js";
-import fieldsData from "../../data/formData.js";
+import { Outlet, useLocation } from "react-router-dom";
 
-const Layout = () => {
+const Layout = ({ isAdimn }) => {
   const [scrollY, setScrollY] = useState(null);
-
+  let location = useLocation();
   useEffect(() => {
     const handleScroll = () => {
       let scrollY = window.scrollY;
@@ -39,49 +33,21 @@ const Layout = () => {
 
   let containerRef = useRef();
 
-  // new test code
-  const [fields, setFields] = useState(fieldsData);
-  const handleChange = async (e, fieldsArray, regexType, maxLength) => {
-    const { name, value, type, checked } = e.target;
-    console.log("updatedFields", name, value, type, checked,fieldsArray,regexType,maxLength);
-    // Centrlise Fields Validation
-    let updatedFields;
-    updatedFields =
-      type !== "file"
-        ? centrliseFieldsValidation(
-            type,
-            name,
-            value,
-            checked,
-            fieldsArray,
-            regexType,
-            maxLength
-          )
-        : await centrliseFileFieldsValidation(
-            type,
-            name,
-            value,
-            checked,
-            fieldsArray,
-            regexType,
-            maxLength
-          );
-    console.log("updatedFields", updatedFields);
-    return setFields(updatedFields);
-  };
-  console.log("fieldsData", fields);
+  useEffect(() => {
+    scrollToTop();
+  }, [location]);
+
   return (
     <div className="w-full" ref={containerRef}>
-      <Header scrollY={scrollY} />
-      <div className="min-h-lvh">
-        {fields.map((field) => (
-          <InputField
-            onChange={(e) =>
-              handleChange(e, fields, field.regexType, field.maxLength)
-            }
-            formItemProps={field}
-          />
-        ))}
+      <Header scrollY={scrollY} isAdimn={isAdimn} />
+      <div
+        className=" px-3 py-2 bg-customlightGrayBgColor"
+        style={{
+          minHeight: "100vh",
+          height: "auto",
+          maxHeight: "auto",
+        }}
+      >
         <Outlet />
       </div>
       <Footer />

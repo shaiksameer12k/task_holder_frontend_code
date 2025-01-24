@@ -1,10 +1,9 @@
 import React from "react";
-// import logo from "../../assets/smart-x_whiteBg.png";
+import logo from "../../assets/logo1.png";
 import { Col, Row, Image } from "antd";
 import DynamicIcon from "../../reusable/IconComponent/IconComponent";
 
 const Footer = () => {
-  let logo;
   const style = {
     height: "100%",
     display: "flex",
@@ -28,11 +27,11 @@ const Footer = () => {
 
   return (
     <>
-      <div className="px-10 max-sm:px-0 py-2  bg-customDarkBgColor">
+      <div className="px-10 py-2 xs:px-0 sm:px-0   bg-customDarkBgColor">
         <Row gutter={[5, 0]} style={{ marginLeft: 0, marginRight: 0 }}>
           <Col xs={24} sm={12} md={12} lg={6} className="gutter-row">
             <div style={style}>
-              <Image src={logo} width={150} />
+              <h3 className="text-white font-sans text-2xl">Task Holder</h3>
               <span style={footerContent}>
                 We support programs that create advancement opportunities for
                 people.
@@ -79,10 +78,10 @@ const Footer = () => {
                     color="#ff1f59"
                     size={28}
                   />
-                  <li style={{ lineHeight: "25px" }}>
+                  <span style={{ lineHeight: "25px" }}>
                     No. 11/2, KHR House, Palace Rd, Vasanth Nagar, Bengaluru,
                     Karnataka 560052
-                  </li>
+                  </span>
                 </li>
                 <li
                   style={{ ...footerContent, alignItems: "center" }}
@@ -93,21 +92,21 @@ const Footer = () => {
                     color="#ff1f59"
                     size={18}
                   />
-                  <li>9100138472</li>
+                  <span>9100138472</span>
                 </li>
                 <li
                   style={{ ...footerContent, alignItems: "center" }}
                   className="flex justify-start  gap-2"
                 >
                   <DynamicIcon iconName="IoMdMail" color="#ff1f59" size={18} />
-                  <li>smartxtech@gmail.com</li>
+                  <span>xxxxxxxx@gmail.com</span>
                 </li>
               </ul>
             </div>
           </Col>
         </Row>
         <hr />
-        <div className="flex justify-between max-sm:flex-col max-sm:justify-center  items-center">
+        <div className=" px-2 flex justify-between max-sm:flex-col max-sm:justify-center  items-center">
           <span
             style={{
               ...footerContent,
@@ -115,7 +114,7 @@ const Footer = () => {
               margin: "5px 0px",
             }}
           >
-            Designed & Developed by Mano & Sameer
+            Designed & Developed by Sameer
           </span>
           <span
             style={{
@@ -124,7 +123,7 @@ const Footer = () => {
               margin: "5px 0px",
             }}
           >
-            © Copyright 2024 Smart-X All rights reserved.
+            © Copyright 2024 Task Holder All rights reserved.
           </span>
         </div>
       </div>

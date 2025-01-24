@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import imageCompression from "browser-image-compression";
 import { message } from "antd";
 // common field validation
@@ -63,7 +61,6 @@ const regexCode = {
   password:
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,}$/,
 
-  // allowAll: /^[a-zA-Z0-9!@#$%^&*+\\-?]+$/,
   allowAll: /[\\a-zA-Z0-9!@#$%^&*+-\\?]$/,
 
   route: /[\\a-zA-Z0-9!@#$%^&*?]$/,
@@ -391,10 +388,32 @@ export function centrliseFieldsValidation(
       field.name === name
         ? {
             ...field,
-            value: checked ? 1 : 0,
+
+            value: checked,
             isError: field.isMandatory
               ? !checked
                 ? `Please Select the Checkbox`
+                : ""
+              : "",
+          }
+        : field
+    );
+    return updatedArray;
+  }
+  if (
+    type === "radio" ||
+    type === "time" ||
+    type === "datetime-local" ||
+    type === "date"
+  ) {
+    let updatedArray = feildsArray.map((field) =>
+      field.name === name
+        ? {
+            ...field,
+            value: value,
+            isError: field.isMandatory
+              ? !value
+                ? `Please Select ${name}`
                 : ""
               : "",
           }

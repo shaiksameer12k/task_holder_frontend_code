@@ -5,9 +5,9 @@ import Highlighter from "react-highlight-words";
 import Search from "antd/es/input/Search";
 
 const DynamicDataTable = ({
-  data = [],
-  columnsData = [],
-  customid = "",
+  data,
+  columnsData,
+  customid,
   getSelectdRowData,
   loadingTableStatus = false,
 }) => {
@@ -43,6 +43,7 @@ const DynamicDataTable = ({
 
   // Custom search input for each column
   console.log("searchText", searchText);
+
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
       setSelectedKeys,
@@ -124,14 +125,10 @@ const DynamicDataTable = ({
   });
 
   // Handle row selection
+  console.log("selectedRowKeys changed: ", selectedRowKeys);
   const onSelectChange = (newSelectedRowKeys) => {
-    console.log(
-      "selectedRowKeys changed: ",
-      newSelectedRowKeys,
-      selectedRowKeys
-    );
+    console.log("selectedRowKeys changed: ", newSelectedRowKeys);
     getSelectdRowData(newSelectedRowKeys);
-
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
@@ -194,13 +191,15 @@ const DynamicDataTable = ({
       // Apply rendering logic
       return {
         ...column,
-        render: (text) => (
-          <Tooltip placement="topLeft" title={text}>
-            <span style={{ fontWeight: 500 }}>
-              {text && text.length > 20 ? `${text.slice(0, 20)}...` : text}
-            </span>
-          </Tooltip>
-        ),
+        render: col?.render
+          ? col?.render
+          : (text) => (
+              <Tooltip placement="topLeft" title={text}>
+                <span style={{ fontWeight: 500 }}>
+                  {text && text.length > 20 ? `${text.slice(0, 20)}...` : text}
+                </span>
+              </Tooltip>
+            ),
       };
     });
 
@@ -208,7 +207,7 @@ const DynamicDataTable = ({
     setColumns(updatedColumns);
   }, [columnsData, sortedInfo]); // Add sortedInfo as a dependency so it updates when the sorting changes
 
-  console.log("columns", columns, data);
+  console.log("columns*", columns, data);
   return (
     <>
       <Table

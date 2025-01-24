@@ -34,7 +34,7 @@ const LoaderComponent = ({
       setSpinning(false); // Stop spinner when loading is false
       setPercent(0); // Reset percentage
     }
-  }, [loading,fullscreen]); // This effect runs whenever loading prop changes
+  }, [loading, fullscreen]); // This effect runs whenever loading prop changes
 
   document.getElementsByTagName("body").style = "overFlow:hidden";
 
@@ -47,11 +47,10 @@ const LoaderComponent = ({
         tip={spinnerType || "Loading..."} // Custom message during spinner activity
         fullscreen={fullscreen}
         size="large"
-        // style={{ zIndex: "9999999999999999999999" }}
       />
     </>
   );
 };
 
-// Default export of the component
+
 export default LoaderComponent;

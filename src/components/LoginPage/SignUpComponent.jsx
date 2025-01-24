@@ -3,42 +3,41 @@ import { Button, message } from "antd";
 import ButtonComponent from "../../reusable/Button/ButtonComponent";
 import { useNavigate } from "react-router-dom";
 import InputField from "../../reusable/InputField/InputField";
-import {
-  EyeInvisibleOutlined,
-  EyeOutlined,
-  MailOutlined,
-  SecurityScanOutlined,
-} from "@ant-design/icons";
+import { MailOutlined, SecurityScanOutlined, UserOutlined } from "@ant-design/icons";
 import { useApiCalls } from "../../api/apiCalls";
 // import 'antd/dist/antd.css';  // Import Ant Design styles
 // import './LoginComponent.css'; // You can create a custom CSS file if needed
 
-const LoginComponent = () => {
+const SignUpComponent = () => {
   let navigate = useNavigate();
   let { ApiCalls, loadingStates } = useApiCalls();
   const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-
   const [showPassword, setShowPassword] = useState(false);
 
-  const loginApiHandel = async () => {
+  const SignUpApiHandel = async () => {
     if (!email) {
+      return message.error("Please Fill the Email");
+    }
+    if (!userName) {
       return message.error("Please Fill the UserName");
     }
     if (!password) {
       return message.error("Please Fill the Password");
     }
+
     try {
-      let params = { userName: email, password: password };
+      let params = { email: email, userName: userName, password: password };
       let result = await ApiCalls(
-        "loginApiHandel",
+        "SignUpApiHandel",
         "post",
-        "user/login",
+        "user/registerUser",
         params
       );
-      console.log("loginApiHandel", result);
+      console.log("SignUpApiHandel", result);
       if (result) {
-        result?.statusCode === 200 && navigate("/layout");
+        result?.statusCode === 200 && navigate("/userLoginPage");
       }
     } catch (error) {
       console.log(`Error while loginApi ${error}`);
@@ -60,26 +59,44 @@ const LoginComponent = () => {
         >
           <div className="text-start mb-6">
             <h2 className="text-3xl font-semibold text-primaryTextColor">
-              User Sign In
+              User Sign Up
             </h2>
           </div>
 
           <form action="#" method="POST">
-            {/* Username Field */}
-            <div className="mb-4"></div>
+            {/* Email Field */}
             <div className="mb-4">
               <InputField
                 type="text"
                 // label="username"
-                name="username"
+                name="email"
                 id="inputField"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 isError={""}
                 isFieldVisible={true}
                 layout={"vertical"}
-                placeholder="User Name / Email"
+                placeholder="Email"
                 prefix={<MailOutlined />}
+                style={{ padding: 0 }}
+                variant="boderless"
+                size="large"
+              />
+            </div>
+            {/* Username Field */}
+            <div className="mb-4">
+              <InputField
+                type="text"
+                // label="username"
+                name="username"
+                id="inputField"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                isError={""}
+                isFieldVisible={true}
+                layout={"vertical"}
+                placeholder="User Name"
+                prefix={<UserOutlined />}
                 style={{ padding: 0 }}
                 variant="boderless"
                 size="large"
@@ -89,7 +106,7 @@ const LoginComponent = () => {
             {/* Password Field */}
             <div className="mb-4">
               <InputField
-                type={showPassword ? "text" : "password"}
+                type="password"
                 // label="Password"
                 name="password"
                 id="inputField"
@@ -123,22 +140,22 @@ const LoginComponent = () => {
               
             </Button> */}
               <ButtonComponent
-                name="Login"
+                name="Sign Up"
                 type="primary"
-                onClick={loginApiHandel}
+                onClick={SignUpApiHandel}
                 size="large"
                 btnStyle={{ width: "100%" }}
-                loading={loadingStates?.loginApiHandel}
+                loading={loadingStates?.SignUpApiHandel}
               />
             </div>
 
-            {/* Sign Up Link */}
+            {/* Sign In Link */}
             <div className="flex justify-center items-center gap-2">
               <a
-                href="/userSignUpPage"
+                href="/userLoginPage"
                 className="text-blue-500 text-sm hover:underline"
               >
-                Sign Up
+                Sign In
               </a>
             </div>
           </form>
@@ -150,4 +167,4 @@ const LoginComponent = () => {
   );
 };
 
-export default LoginComponent;
+export default SignUpComponent;
