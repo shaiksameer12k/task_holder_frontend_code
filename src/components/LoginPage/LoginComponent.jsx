@@ -44,6 +44,18 @@ const LoginComponent = () => {
       console.log(`Error while loginApi ${error}`);
     }
   };
+  const testApi = async () => {
+    try {
+      let result = await ApiCalls("testApi", "get", "user/");
+      console.log("loginApiHandel", result);
+    } catch (error) {
+      console.log(`Error while testApi ${error}`);
+    }
+  };
+
+  useEffect(() => {
+    testApi();
+  }, []);
 
   return (
     <div
